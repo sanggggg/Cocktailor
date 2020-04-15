@@ -27,7 +27,10 @@
             android:layout_height="match_parent"
             app:adapter="@{adapter}"
             app:bindCocktailList="@{viewModel.cocktailListLiveData}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:bindPagenation="@{viewModel}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            android:scrollbars="vertical"
             tools:listitem="@layout/item_cocktail" />
 
 

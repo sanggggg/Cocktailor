@@ -17,11 +17,16 @@ class DetailActivityViewModel @Inject constructor(private val detailRepository: 
     val cocktailLiveData: LiveData<Cocktail>
         get() = _cocktailLiveData
 
-    val ingredientsLiveData: LiveData<List<Ingredient>>
+    val recipeLiveData: LiveData<List<Ingredient>>
+
+    val instructionsLiveData: LiveData<List<String>>
 
     init {
-        ingredientsLiveData = Transformations.switchMap(_cocktailLiveData) {
+        recipeLiveData = Transformations.switchMap(_cocktailLiveData) {
             detailRepository.loadCocktailWithIngredient(it.ingredients)
+        }
+        instructionsLiveData = Transformations.map(_cocktailLiveData) {
+            it.ingredients.zip(it.measures) { ingredient, measure -> "$ingredient $measure"}
         }
     }
 

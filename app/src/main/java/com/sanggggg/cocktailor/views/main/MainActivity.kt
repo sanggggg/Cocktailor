@@ -4,15 +4,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sanggggg.cocktailor.R
 import com.sanggggg.cocktailor.databinding.ActivityMainBinding
-import com.sanggggg.cocktailor.di.DaggerAppComponent
 import dagger.android.AndroidInjection
-import dagger.android.DaggerActivity
-import dagger.android.support.DaggerAppCompatActivity
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         AndroidInjection.inject(this)
 
-        viewModel.setCocktailName("Margarita")
+        viewModel.postCocktailPage("a")
         binding.run {
             lifecycleOwner = this@MainActivity
             viewModel = this@MainActivity.viewModel

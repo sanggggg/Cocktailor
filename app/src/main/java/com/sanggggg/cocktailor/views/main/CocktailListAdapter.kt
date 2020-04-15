@@ -22,8 +22,7 @@ class CocktailListAdapter : RecyclerView.Adapter<CocktailItemViewHolder>() {
 
     override fun getItemCount() = items.count()
 
-    fun setItems(cocktails: List<Cocktail>) {
-        items.clear()
+    fun addItems(cocktails: List<Cocktail>) {
         items.addAll(cocktails)
         notifyDataSetChanged()
     }
@@ -40,7 +39,6 @@ class CocktailItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     fun bindCocktail(cocktail: Cocktail) {
         item = cocktail
-        Timber.i("Bind $item")
         itemView.run {
             setOnClickListener(this@CocktailItemViewHolder)
             item_cocktail_name.text = cocktail.name

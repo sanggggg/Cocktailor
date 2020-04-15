@@ -6,11 +6,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sanggggg.cocktailor.R
 import com.sanggggg.cocktailor.databinding.ActivityDetailBinding
 import com.sanggggg.cocktailor.models.Cocktail
 import dagger.android.AndroidInjection
+import timber.log.Timber
 import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
@@ -37,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding.let {
             it.viewModel = viewModel
+            it.adapter = RecipeAdapter()
             it.lifecycleOwner = this
         }
     }

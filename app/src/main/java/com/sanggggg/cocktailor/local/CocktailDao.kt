@@ -12,6 +12,9 @@ interface CocktailDao {
     @Query("SELECT * FROM cocktail WHERE lower(name) LIKE '%' || lower(:name) || '%'")
     fun getContains(name: String): LiveData<List<Cocktail>>
 
+    @Query("SELECT * FROM cocktail WHERE lower(name) LIKE lower(:letter) || '%' ORDER BY lower(name)")
+    fun getStartWith(letter: String): LiveData<List<Cocktail>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCocktail(data: List<Cocktail>)
 }

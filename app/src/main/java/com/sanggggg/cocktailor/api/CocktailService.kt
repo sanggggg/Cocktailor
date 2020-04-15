@@ -9,6 +9,9 @@ interface CocktailService {
     @GET("api/json/v1/1/search.php")
     fun fetchCocktailName(@Query("s") name: String): Observable<Response<CocktailResponse>>
 
+    @GET("api/json/v1/1/search.php")
+    fun fetchCocktailFirstLetter(@Query("f") letter: String): Observable<Response<CocktailResponse>>
+
     @GET("api/json/v1/1/lookup.php")
     fun fetchCocktailId(@Query("i") id: Long): Observable<Response<CocktailResponse>>
 

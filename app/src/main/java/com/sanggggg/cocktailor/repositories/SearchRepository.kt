@@ -13,8 +13,8 @@ class SearchRepository @Inject constructor(
     private val dao: CocktailDao
 ) {
 
-    fun loadCocktailList(query: String): LiveData<List<Cocktail>> {
-        service.fetchCocktailName(query)
+    fun loadCocktailFirstLetter(startWith: String): LiveData<List<Cocktail>> {
+        service.fetchCocktailFirstLetter(startWith)
             .observeOn(Schedulers.io())
             .subscribeOn(Schedulers.io())
             .subscribe(
@@ -27,7 +27,7 @@ class SearchRepository @Inject constructor(
                     Timber.e(it)
                 }
             )
-        return dao.getContains(query)
+        return dao.getStartWith(startWith)
     }
 
 }

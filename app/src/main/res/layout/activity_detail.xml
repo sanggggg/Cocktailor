@@ -4,85 +4,124 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.sanggggg.cocktailor.views.detail.DetailActivityViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.sanggggg.cocktailor.views.detail.RecipeAdapter" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:image_url="@{viewModel.cocktailLiveData.thumbnail}"
-            android:contentDescription="@string/default_description"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/cocktail_name"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.cocktailLiveData.name}"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            android:layout_marginBottom="60dp">
 
-        <TextView
-            android:id="@+id/cocktail_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.cocktailLiveData.category}"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cocktail_name" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:contentDescription="@string/default_description"
+                android:scaleType="fitCenter"
+                app:image_url="@{viewModel.cocktailLiveData.thumbnail}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/cocktail_instruction_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/DetailTitle"
-            android:text="@string/instruction"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cocktail_category" />
+            <TextView
+                android:id="@+id/cocktail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{viewModel.cocktailLiveData.name}"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <TextView
-            android:id="@+id/cocktail_instruction_body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/DetailDescription"
-            android:text="@{viewModel.cocktailLiveData.instructions}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cocktail_instruction_title" />
+            <TextView
+                android:id="@+id/cocktail_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.cocktailLiveData.category}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_name" />
 
-        <TextView
-            android:id="@+id/cocktail_recipe_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/DetailTitle"
-            android:text="@string/recipe"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cocktail_instruction_body" />
+            <TextView
+                android:id="@+id/cocktail_instruction_title"
+                style="@style/DetailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_category" />
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            app:adapter="@{adapter}"-->
-<!--            app:adapterRecipe="@{viewModel.cocktailDetailLiveData}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/cocktail_recipe_title" />-->
+            <TextView
+                android:id="@+id/cocktail_instruction_body"
+                style="@style/DetailDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.cocktailLiveData.instructions}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_instruction_title" />
+
+            <TextView
+                android:id="@+id/cocktail_recipe_title"
+                style="@style/DetailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recipe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_instruction_body" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/instructions_list_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:bindInstructions="@{viewModel.instructionsLiveData}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_recipe_title"
+                />
+
+            <TextView
+                android:id="@+id/cocktail_ingredient_title"
+                style="@style/DetailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/instructions_list_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:adapter="@{adapter}"
+                app:bindRecipeList="@{viewModel.recipeLiveData}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cocktail_ingredient_title"
+                tools:listitem="@layout/item_recipe_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

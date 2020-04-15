@@ -1,7 +1,6 @@
 package com.sanggggg.cocktailor.repositories
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.sanggggg.cocktailor.api.CocktailService
 import com.sanggggg.cocktailor.local.IngredientDao
@@ -15,8 +14,8 @@ class DetailRepository @Inject constructor(
     private val dao: IngredientDao
 ) {
     fun loadCocktailWithIngredient(ingredients: List<String>): LiveData<List<Ingredient>> {
-        val ret = MutableLiveData<List<Ingredient>>()
-        val _ret = ArrayList<Ingredient>()
+        val recipe = MutableLiveData<List<Ingredient>>()
+        val _recipe = ArrayList<Ingredient>()
 
 
         // TODO: Room Local DB 에서 읽어오기
@@ -29,8 +28,8 @@ class DetailRepository @Inject constructor(
                         if (it.isSuccessful) {
                             it.body()?.let { payload ->
                                 dao.insertIngredients(payload.ingredients)
-                                _ret.addAll(payload.ingredients)
-                                ret.postValue(_ret)
+                                _recipe.addAll(payload.ingredients)
+                                recipe.postValue(_recipe)
                             }
                         }
                     },
@@ -39,7 +38,7 @@ class DetailRepository @Inject constructor(
                     }
                 )
         }
-        return ret
+        return recipe
     }
 
 }

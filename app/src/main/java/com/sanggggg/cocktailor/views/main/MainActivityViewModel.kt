@@ -1,6 +1,5 @@
 package com.sanggggg.cocktailor.views.main
 
-import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -12,15 +11,15 @@ import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor(repository: SearchRepository) :
     ViewModel() {
-    private val _cocktailNameLiveData = MutableLiveData<String>()
+    private val _cocktailFirstLetterLiveData = MutableLiveData<String>()
     val cocktailListLiveData: LiveData<List<Cocktail>>
 
     init {
         Timber.i("MainActivityViewModel injected!")
 
-        cocktailListLiveData = Transformations.switchMap(_cocktailNameLiveData) { name ->
-            _cocktailNameLiveData.value?.let {
-                repository.loadCocktailList(name)
+        cocktailListLiveData = Transformations.switchMap(_cocktailFirstLetterLiveData) { startWith ->
+            _cocktailFirstLetterLiveData.value?.let {
+                repository.loadCocktailFirstLetter(startWith)
             } ?: object : LiveData<List<Cocktail>>() {
                 init {
                     postValue(null)
@@ -29,7 +28,7 @@ class MainActivityViewModel @Inject constructor(repository: SearchRepository) :
         }
     }
 
-    fun setCocktailName(query: String) {
-        _cocktailNameLiveData.postValue(query)
+    fun postCocktailPage(startWith: String) {
+        _cocktailFirstLetterLiveData.postValue(startWith)
     }
 }
