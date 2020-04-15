@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Cocktailor</string>
+    <string name="default_description">Null</string>
+    <string name="default_cocktail">Mocktail</string>
+    <string name="instruction">Instruction</string>
+    <string name="recipe">Recipe</string>
 </resources>

@@ -35,15 +35,20 @@ class DetailActivity : AppCompatActivity() {
             viewModel.setModel(it)
         }
 
-        binding.viewModel = viewModel
+        binding.let {
+            it.viewModel = viewModel
+            it.lifecycleOwner = this
+        }
     }
 
     companion object {
         const val MODEL_KEY: String = "cocktail_key"
         fun startActivityWithModel(context: Context, cocktail: Cocktail) {
-            val intent = Intent().also { it.putExtra(MODEL_KEY, cocktail) }
-            context.startActivity(intent)
-
+            context.let {
+                val intent = Intent(it, DetailActivity::class.java)
+                intent.putExtra(MODEL_KEY, cocktail)
+                it.startActivity(intent)
+            }
         }
     }
 }

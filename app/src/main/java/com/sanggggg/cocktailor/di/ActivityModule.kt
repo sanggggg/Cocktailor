@@ -1,7 +1,7 @@
 package com.sanggggg.cocktailor.di
 
 import com.sanggggg.cocktailor.di.annotations.ActivityScope
-import com.sanggggg.cocktailor.views.MainActivity
+import com.sanggggg.cocktailor.views.main.MainActivity
 import com.sanggggg.cocktailor.views.detail.DetailActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
